@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 function ProfessorCard({professor}) {
     let navigate =useNavigate();
     function onProfessorClick() {
-        navigate('/evaluations')
+        navigate('/classesPerProfessor')
     }
 
     return <div className="professor-card" onClick={onProfessorClick}>
