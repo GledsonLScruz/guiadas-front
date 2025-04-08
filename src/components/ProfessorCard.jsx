@@ -1,19 +1,21 @@
 import "../css/ProfessorCard.css"
 import { useNavigate } from "react-router-dom";
 
-function ProfessorCard({professor}) {
-    let navigate =useNavigate();
-    function onProfessorClick() {
-        navigate('/classesPerProfessor')
-    }
+const ProfessorItem = ({id, nome }) => {
+  let navigate =useNavigate();
 
-    return <div className="professor-card" onClick={onProfessorClick}>
-        <button className="professor-card-button">
-            <div className="professor-name">
-                <h3>{professor.name}</h3>
-            </div>
-        </button>
-    </div>
+  function onProfessorClick() {
+    localStorage.setItem('selectedProfessor', id);
+    console.log(`professor id: ${id}`);
+    navigate('/classesPerProfessor');
 }
+  return (
+    <button className="professor-item" onClick={onProfessorClick}>
+      {nome}
+    </button>
 
-export default ProfessorCard
+    
+  );
+};
+
+export default ProfessorItem

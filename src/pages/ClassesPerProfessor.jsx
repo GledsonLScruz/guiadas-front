@@ -2,24 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import { useNavigate } from "react-router-dom";
+import DisciplinaItem from "../components/ClassItem";
 
-// Componente para exibir cada disciplina
-const DisciplinaItem = ({ id, nome, periodo }) => {
-  let navigate = useNavigate();
-
-  const onCourseClick = async () => {
-    localStorage.setItem('selectedClass', id);
-    console.log(`class id: ${id}`);
-    navigate('/Evaluations');
-  };
-
-  return (
-    <div className="disciplina-item" onClick={onCourseClick}>
-      <p className="disciplina-nome">{nome}</p>
-      <p className="disciplina-periodo">Período: [{periodo}]</p>
-    </div>
-  );
-};
 
 // Componente principal
 const TelaDisciplinasProfessor = () => {

@@ -1,79 +1,12 @@
 import ProfessorCard from "../components/ProfessorCard"
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-
-import { useNavigate } from "react-router-dom";
-
-function Professors() {
-    const [searchQuery,setSearchQuery] = useState("");
-
-    const professors = [
-        {
-            id: 1, name : "Dalton"
-        },
-        {
-            id: 2, name : "Glauber"
-        },
-        {
-            id: 3, name : "Thiago"
-        }
-    ];
-
-    const handleSearch = (e) => {
-        e.preventDefault()
-        
-    };
-
-    return <div className="Home">
-        <form className="search-form" onSubmit={handleSearch}>
-            <h2>Professores</h2>
-
-            <input 
-            type="text" 
-            placeholder="Pesquise um professor..." 
-            className="search-input"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <button type="submit" className="search-button">Pesquisar</button>
-        </form>
-
-        <div className="professors-grid">
-            {
-                professors.map(
-                    (professor) => 
-                
-                (<ProfessorCard professor={professor} key={professor.id}/>)
-                
-               
-                )
-            }
-        </div>
-    </div>
-}
-
-
-const ProfessorItem = ({id, nome }) => {
-  let navigate =useNavigate();
-
-  function onProfessorClick() {
-    localStorage.setItem('selectedProfessor', id);
-    console.log(`professor id: ${id}`);
-    navigate('/classesPerProfessor');
-}
-  return (
-    <button className="professor-item" onClick={onProfessorClick}>
-      {nome}
-    </button>
-
-    
-  );
-};
+import ProfessorItem from "../components/ProfessorCard";
 
 export default function ProfessoresPage() {
   const [professores, setProfessores] = useState([]);
   const [filtro, setFiltro] = useState("");
-  const [usuario, setUsuario] = useState({ nome: "Gutenberg", foto: "https://via.placeholder.com/40" });
+  const [usuario, setUsuario] = useState({ nome: "Gutenberg", foto: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" });
 
   useEffect(() => {
     axios.get("http://localhost:3000/api/professors/")
@@ -109,7 +42,7 @@ export default function ProfessoresPage() {
       <main>
         <div className="grid-professores">
           {professoresFiltrados.map((prof, index) => (
-            <ProfessorItem key={index} nome={prof.name} id= {prof.id}/>
+            <ProfessorItem key={index} nome={prof.name} id={prof.id} />
           ))}
         </div>
       </main>
